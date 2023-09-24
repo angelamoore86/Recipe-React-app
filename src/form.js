@@ -1,6 +1,9 @@
 import {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 export function AddRecipe( { handleSubmit }) {
+const navigate = useNavigate();
 
 const [recipe, setRecipe] = useState({
     name: "",
@@ -12,14 +15,15 @@ const [recipe, setRecipe] = useState({
   const submitRecipe = (e) => {
     e.preventDefault();
     handleSubmit(recipe);
+    navigate('/');
     setRecipe({
-        id: "",
         name: "",
         ingredients: "",
         directions: "",
         description: "",
         image: "",
     });
+   
   };
     return (
         <div>
@@ -46,7 +50,7 @@ const [recipe, setRecipe] = useState({
                 </div>
                 <div>
                     <label>Select Image File: </label>
-                    <input type="file" value={recipe.image} src={recipe.image}
+                    <input type="file" value={recipe.image}
                     onChange={ (e) => setRecipe({...recipe, image: e.target.value })}></input>
                 </div>
                 <button type='submit'>Add Recipe</button>

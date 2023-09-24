@@ -16,9 +16,6 @@ function Home(){
 
   if (recipes == null) return;
   
-  const addRecipe = (newRecipe) => {
-    setRecipes([...recipes, newRecipe]);
-  };
   return (
     <div>
       <nav>
@@ -26,7 +23,6 @@ function Home(){
       </nav>
       <h1>Recipes</h1>
       <RecipeList recipesData={recipes} setRecipesData={setRecipes} />
-      <AddRecipe handleSubmit={addRecipe}/>
     </div>
   );
 }
