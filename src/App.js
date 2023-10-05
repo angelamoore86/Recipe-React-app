@@ -1,53 +1,26 @@
 import './App.css';
-import {useEffect, useState} from 'react';
-import {RecipeList} from './Recipe';
-import AddRecipe from './form';
-import {Link} from "react-router-dom";
-
-function Home(){
-  const [recipes, setRecipes] = useState(null);
-
-  useEffect( () => {
-    fetch("./recipe.json")
-    .then( response => response.json() )
-    .then(setRecipes)
-    .catch(e => console.log(e.message));
-  }, [])
-
-  if (recipes == null) return;
-  
-  return (
-    <div>
-      <nav>
-        <Link to="/add">Add Recipe</Link>
-      </nav>
-      <h1>Recipes</h1>
-      <RecipeList recipesData={recipes} setRecipesData={setRecipes} />
-    </div>
-  );
-}
-
-export function Add(){
-  const [recipes, setRecipes] = useState([]);
-
-  const addRecipe = (newRecipe) => {
-    setRecipes([...recipes, newRecipe]);
-  };
-  
-  return (
-    <div>
-      <nav>
-        <Link to="/">Home</Link>
-      </nav>
-      <h1>Add Recipe</h1>
-      <h3>To add a recipe fill out the form below.</h3>
-      <AddRecipe handleSubmit={addRecipe} />
-    </div>
-  ); 
-}
+import RecipeList from './pages/Recipes';
+import NotFoundPage from './pages/NotFoundPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NavBar from './NavBar';
+import AddRecipeForm from './pages/AddRecipeForm';
 
 export function App() {
-  return <Home />; 
+  return (
+    <BrowserRouter>
+    <div className='App'>
+      <NavBar />
+      <div id="page-body">
+    <Routes>
+        <Route path="/" element={<RecipeList />} />
+        <Route path="/form" element={<AddRecipeForm />} />
+        <Route path="*" element={<NotFoundPage />} />
+    </Routes>
+      </div>
+    </div>  
+    </BrowserRouter>
+    
+  );
 }
 
 export default App;
