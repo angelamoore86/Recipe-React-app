@@ -1,6 +1,6 @@
 {
   "homepage": "http://angelamoore86.github.io/Recipe-React-app/",
-  "name": "frontend",
+  "name": "recipe-app2",
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:8000/",
